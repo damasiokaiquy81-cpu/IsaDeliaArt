@@ -1,0 +1,242 @@
+/* ============================================================
+   BIOSITE — ISA D'ELIA ART (paleta clara)
+   ------------------------------------------------------------
+   Mesma paleta do PDF/portfólio: fundo creme #EEE9E3, tinta
+   quase-preta, neutros quentes — minimalista e clean.
+   Playfair Display + Inter, moldura de quadro no avatar.
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #EEE9E3;          /* creme igual ao fundo do portfólio */
+  --bg2: #F4F1EA;
+  --painel: #FFFFFF;
+  --linha: #DED6C7;
+  --linha-forte: #C9BFAE;
+  --texto: #1C1917;       /* tinta quase-preta (texto do PDF) */
+  --suave: #6E655A;
+  --mudo: #9A9083;
+  --tinta: #26211A;       /* botões primários (tinta escura) */
+  --bronze: #8A7455;      /* detalhes mornos da paleta */
+  --verde: #3A9A5B;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--texto);
+  font: 400 16px/1.65 var(--sans);
+  display: flex; justify-content: center;
+  padding: clamp(20px, 4vw, 44px) 18px;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+::selection { background: rgba(138, 116, 85, .25); }
+
+/* luz de fundo bem sutil (sensação de papel) */
+.luz {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(520px 360px at 72% -5%, rgba(255, 255, 255, .75), transparent 70%),
+    radial-gradient(640px 480px at 10% 105%, rgba(216, 196, 163, .35), transparent 72%);
+}
+
+/* ---------------- moldura do avatar ---------------- */
+.moldura {
+  background: linear-gradient(135deg, #FFFFFF, #F3EFE7 55%, #E7DFD2);
+  padding: 10px; border-radius: 8px;
+  border: 1px solid var(--linha);
+  box-shadow: 0 22px 48px -22px rgba(60, 50, 35, .38);
+}
+.passpartout { background: #FFFFFF; padding: 9px; border-radius: 3px; border: 1px solid #ECE5D9; }
+.passpartout img { box-shadow: 0 6px 16px -8px rgba(60, 50, 35, .45); }
+
+.avatar { width: 158px; transform: rotate(-1.6deg); transition: transform .35s; }
+.avatar:hover { transform: rotate(0deg) scale(1.02); }
+.avatar .passpartout img { aspect-ratio: 1 / 1.08; object-fit: cover; }
+
+/* plaquinha do @ */
+.placa {
+  background: var(--painel);
+  border: 1px solid var(--linha); border-radius: 6px;
+  text-align: center; padding: 8px 16px;
+}
+.placa span { font: 400 12px var(--sans); color: var(--mudo); }
+.placa strong { font: 600 14px var(--serif); color: var(--bronze); letter-spacing: .04em; }
+
+/* ---------------- layout ---------------- */
+.bio {
+  width: min(460px, 100%);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding-top: clamp(20px, 6vh, 56px);
+}
+.bio-topo {
+  display: grid; justify-items: center; gap: 14px;
+  animation: surgir .6s ease backwards;
+}
+.handle {
+  cursor: pointer; color: inherit;
+  font: 600 14px var(--sans); letter-spacing: .06em; color: var(--bronze);
+  transition: transform .2s, border-color .2s;
+}
+.handle:hover { transform: translateY(-2px); border-color: var(--bronze); }
+
+h1 { font: 600 clamp(30px, 6vw, 38px)/1.15 var(--serif); margin-top: 26px; animation: surgir .6s .1s ease backwards; }
+.frase { color: var(--suave); font-size: 15.5px; margin-top: 10px; max-width: 40ch; animation: surgir .6s .18s ease backwards; }
+
+.status {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 18px; padding: 8px 18px; border-radius: 999px;
+  background: var(--painel); border: 1px solid var(--linha);
+  color: var(--suave); font: 600 13px var(--sans); letter-spacing: .04em;
+  animation: surgir .6s .26s ease backwards;
+}
+.ponto {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--verde);
+  box-shadow: 0 0 0 0 rgba(58, 154, 91, .5); animation: pulso 2.2s infinite;
+}
+@keyframes pulso {
+  0% { box-shadow: 0 0 0 0 rgba(58, 154, 91, .5); }
+  70% { box-shadow: 0 0 0 9px rgba(58, 154, 91, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(58, 154, 91, 0); }
+}
+
+/* ---------------- botões de link ---------------- */
+.links { width: 100%; display: grid; gap: 13px; margin-top: 30px; }
+
+.link {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-radius: 14px;
+  background: var(--painel);
+  border: 1px solid var(--linha);
+  color: var(--texto); text-decoration: none;
+  animation: surgir .55s ease backwards;
+  transition: transform .22s, border-color .22s, box-shadow .22s, background .22s;
+  position: relative; overflow: hidden;
+}
+.link:hover {
+  transform: translateY(-3px);
+  border-color: var(--linha-forte);
+  box-shadow: 0 18px 38px -18px rgba(60, 50, 35, .38);
+}
+.link:hover .seta { transform: translateX(4px); color: var(--tinta); }
+
+.icone {
+  flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #F3EFE7; color: var(--bronze);
+  border: 1px solid var(--linha);
+}
+.textos { display: grid; text-align: left; gap: 1px; min-width: 0; }
+.textos strong { font: 600 15px var(--sans); letter-spacing: .01em; }
+.textos small { font: 500 12.5px var(--sans); color: var(--mudo); }
+
+.seta { margin-left: auto; color: var(--mudo); font-size: 18px; transition: transform .2s, color .2s; }
+
+/* botão do WhatsApp (verde discreto) */
+.link.whatsapp { border-color: rgba(58, 154, 91, .38); }
+.link.whatsapp .icone { background: rgba(58, 154, 91, .1); color: var(--verde); border-color: rgba(58, 154, 91, .3); }
+
+/* botão em destaque (tinta escura) */
+.link.destaque {
+  background: var(--tinta);
+  border-color: var(--tinta); color: #F5F1E8;
+  box-shadow: 0 16px 36px -16px rgba(38, 33, 26, .65);
+}
+.link.destaque .icone { background: rgba(245, 241, 232, .12); color: #F5F1E8; border-color: rgba(245, 241, 232, .25); }
+.link.destaque .textos small { color: rgba(245, 241, 232, .68); }
+.link.destaque .seta { color: rgba(245, 241, 232, .75); }
+.link.destaque:hover { background: #171310; border-color: #171310; }
+
+/* ---------------- rodapé ---------------- */
+.bio-rodape {
+  margin-top: 36px; display: grid; gap: 12px; justify-items: center;
+  color: var(--mudo); font-size: 13px;
+  animation: surgir .6s .5s ease backwards;
+}
+.btn-mini {
+  padding: 9px 18px; border-radius: 999px;
+  background: var(--painel); border: 1px solid var(--linha);
+  color: var(--suave); font: 600 13px var(--sans); cursor: pointer;
+  transition: transform .2s, border-color .2s, color .2s;
+}
+.btn-mini:hover { transform: translateY(-2px); border-color: var(--linha-forte); color: var(--texto); }
+
+/* ---------------- toast ---------------- */
+#toast {
+  position: fixed; left: 50%; bottom: 26px; z-index: 100;
+  transform: translateX(-50%) translateY(16px); opacity: 0; pointer-events: none;
+  background: var(--tinta); border: 1px solid #3B342A; color: #F5F1E8;
+  padding: 12px 22px; border-radius: 999px;
+  font: 500 14.5px var(--sans); white-space: nowrap; max-width: 92vw; overflow: hidden; text-overflow: ellipsis;
+  transition: opacity .35s, transform .35s;
+  box-shadow: 0 18px 44px -14px rgba(38, 33, 26, .55);
+}
+#toast.mostrar { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------------- popup de e-mail ---------------- */
+body.travado { overflow: hidden; }
+
+.popup-email { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: clamp(12px, 3vw, 26px); }
+.popup-email[hidden] { display: none; }
+.popup-email-fundo { position: absolute; inset: 0; background: rgba(28, 25, 23, .55); backdrop-filter: blur(6px); }
+.popup-email-caixa {
+  position: relative; width: min(560px, 100%); max-height: 92vh; overflow: auto;
+  background: var(--painel); border: 1px solid var(--linha); border-radius: 18px;
+  padding: clamp(22px, 4vw, 34px);
+  box-shadow: 0 40px 120px rgba(40, 33, 24, .45);
+  animation: surgir .3s ease;
+}
+.popup-email-sobre { font: 600 12px var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--bronze); margin-bottom: 8px; }
+.popup-email-caixa h3 { font: 600 clamp(24px, 3vw, 30px)/1.2 var(--serif); color: var(--texto); }
+.popup-email-fechar {
+  position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--linha); background: rgba(255, 255, 255, .85);
+  color: var(--suave); font-size: 17px; cursor: pointer;
+  transition: transform .25s, color .2s, border-color .2s;
+}
+.popup-email-fechar:hover { color: var(--bronze); border-color: var(--bronze); transform: rotate(90deg); }
+.popup-email-para { margin-top: 10px; font-size: 14.5px; color: var(--suave); }
+.popup-email-para strong { color: var(--bronze); font-weight: 600; word-break: break-all; }
+.popup-email-campo { display: grid; gap: 5px; margin-top: 14px; text-align: left; }
+.popup-email-campo span { font: 600 11.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--mudo); }
+.popup-email-campo input, .popup-email-campo textarea {
+  width: 100%; padding: 12px 14px; background: #FFFFFF;
+  border: 1px solid var(--linha); border-radius: 10px;
+  color: var(--texto); font: 400 14.5px var(--sans); resize: vertical;
+}
+.popup-email-campo textarea { min-height: 110px; }
+.popup-email-campo input::placeholder, .popup-email-campo textarea::placeholder { color: var(--mudo); }
+.popup-email-campo input:focus, .popup-email-campo textarea:focus {
+  outline: none; border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(138, 116, 85, .18);
+}
+.popup-email-acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.popup-email-btn {
+  padding: 12px 20px; border-radius: 999px;
+  font: 600 14.5px var(--sans); cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid transparent;
+  transition: transform .2s, filter .2s, border-color .2s, color .2s, background .2s;
+}
+.popup-email-btn:active { transform: scale(.97); }
+.popup-email-primario { background: var(--tinta); color: #F5F1E8; box-shadow: 0 10px 26px -12px rgba(38, 33, 26, .6); }
+.popup-email-primario:hover { transform: translateY(-2px); filter: brightness(1.15); }
+.popup-email-secundario { background: transparent; border-color: var(--linha-forte); color: var(--suave); }
+.popup-email-secundario:hover { border-color: var(--bronze); color: var(--texto); transform: translateY(-2px); }
+.popup-email-dica { margin-top: 14px; font-size: 13px; color: var(--mudo); }
+
+/* ---------------- animações ---------------- */
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.avatar, .handle { animation: surgir .6s ease backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .link, .bio-topo, h1, .frase, .status, .bio-rodape, .avatar, .handle { animation: none; }
+  .ponto { animation: none; }
+  .link, .avatar, .handle, .btn-mini, .seta { transition: none; }
+}
